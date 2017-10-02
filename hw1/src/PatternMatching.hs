@@ -9,6 +9,7 @@ module PatternMatching
 
 import           Data.List     (partition)
 import           System.Random (newStdGen, randomRs)
+import           Control.Arrow ((***))
 
 removeAtBase :: Int -> [a] -> [a]
 removeAtBase n xs = ys ++ if null zs then zs else tail zs
@@ -21,7 +22,7 @@ removeAt n xs
   | otherwise               = (Nothing, xs)
 
 collectEvery :: Int -> [a] -> ([a], [a])
-collectEvery nth xs = (map snd $ fst parted, map snd $ snd parted)
+collectEvery nth xs = (map snd *** map snd) parted
   where
     partitionFunc :: Int -> [a] -> ([(Int, a)], [(Int, a)])
     partitionFunc n = partition (\(x, _) -> mod x n /= 0) . zip [1..]

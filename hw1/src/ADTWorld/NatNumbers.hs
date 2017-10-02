@@ -20,7 +20,7 @@ instance Show Nat where
 instance Eq Nat where
     Z == Z         = True
     (S x) == (S y) = x == y
-    x == y         = False
+    _ == _         = False
 
 instance Ord Nat where
     Z <= _         = True
@@ -52,7 +52,7 @@ natSum Z y     = y
 natSum (S x) y = S $ natSum x y
 
 natMult :: Nat -> Nat -> Nat
-natMult Z y     = Z
+natMult Z _     = Z
 natMult (S x) y = natSum y $ natMult x y
 
 natSub :: Nat -> Nat -> Nat
@@ -63,9 +63,10 @@ natSub Z _         = error "Subtraction from Z in Nat numbers"
 natDivWithMod :: Nat -> Nat -> (Nat, Nat)
 natDivWithMod Z _ = (Z, Z)
 natDivWithMod _ Z = error "Devision by zero"
-natDivWithMod x y  = divImpl (S Z) x y
+natDivWithMod a b  = divImpl (S Z) a b
   where
     divImpl :: Nat -> Nat -> Nat -> (Nat, Nat)  -- x / y = z
+    divImpl Z _ _           = error "Unexpected state"
     divImpl z@(S prevZ) x y
       | checkX > x  = (prevZ, x - y * prevZ)
       | checkX == x = (z, Z)

@@ -24,5 +24,5 @@ fight fstEntity sndEntity
       | health e2 <= 0 = (e1, e2, rounds)
       | otherwise = fightImpl (e2 { health = health e2 - attack e1 }, e1, rounds + 1)
     showResult :: (Entity, Entity, Int) -> IO ()
-    showResult (e1, e2, rounds) = putStrLn $ "Winner is " ++ show e1 ++ "\n"
+    showResult (e1, _, rounds) = putStrLn $ "Winner is " ++ show e1 ++ "\n"
                                     ++ "Rounds: " ++ show rounds

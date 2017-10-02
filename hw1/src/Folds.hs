@@ -15,7 +15,7 @@ instance (Ord a) => Monoid (Tree a) where
 instance Foldable Tree where
     foldr _ z Leaf         = z
     foldr f z (Node x l r) = foldr f (f x (foldr f z r)) l
-    foldMap f Leaf         = mempty
+    foldMap _ Leaf         = mempty
     foldMap f (Node x l r) = mappend (foldMap f l) (mappend (f x) (foldMap f r))
 
 -- task 2

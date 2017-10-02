@@ -7,6 +7,7 @@ module SimpleFunctions
         ) where
 
 import           Data.List (sort)
+import           Control.Arrow ((***))
 
 order3 :: (Ord a) => (a, a, a) -> (a, a, a)
 order3 (x, y, z) = (\[e1, e2, e3] -> (e1, e2, e3)) $ sort [x, y, z]
@@ -19,7 +20,7 @@ highestBitBase n
 highestBit :: Integer -> (Integer, Integer)
 highestBit n
   | n == 1    = (1, 0)
-  | otherwise = (2 * fst res, 1 + snd res)
+  | otherwise = ((*) 2 *** (+) 1) res
   where
     res = highestBit (div n 2)
 
