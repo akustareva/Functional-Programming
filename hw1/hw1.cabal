@@ -26,6 +26,7 @@ library
                      , ADTWorld.NatNumbers
                      , ADTWorld.Trees
                      , Folds
+                     , Monoids
   ghc-options:         -Wall
   build-depends:       base >= 4.9 && < 5
                      , random
@@ -43,6 +44,7 @@ test-suite hw1-test
                      , ADTWorld.NatNumbersSpec
                      , ADTWorld.TreesSpec
                      , FoldsSpec
+                     , MonoidsSpec
   build-depends:       base
                      , hw1
                      , hspec
