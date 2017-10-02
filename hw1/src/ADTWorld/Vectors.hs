@@ -10,7 +10,7 @@ module ADTWorld.Vectors
        ) where
 
 data Vector a = Vector2D a a | Vector3D a a a
-    deriving (Show)
+    deriving (Eq, Show)
 
 packVector :: Vector a -> [a]
 packVector (Vector2D x y)   = [x, y]

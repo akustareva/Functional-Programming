@@ -10,6 +10,7 @@ module ADTWorld.Trees
        ) where
 
 data Tree a = Leaf | Node a (Tree a) (Tree a)
+    deriving(Eq, Show)
 
 isLeaf :: Tree a -> Bool
 isLeaf Leaf{} = True
@@ -29,7 +30,7 @@ findKey (Node x l r) key
   | otherwise = findKey l key || findKey r key
 
 insertKey :: Ord a => Tree a -> a -> Tree a
-insertKey Leaf key      = Node key Leaf Leaf
+insertKey Leaf key              = Node key Leaf Leaf
 insertKey node@(Node x l r) key
   | key < x  = Node x (insertKey l key) r
   | key == x = node

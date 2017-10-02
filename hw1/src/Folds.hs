@@ -23,4 +23,4 @@ splitOn :: Eq a => a -> [a] -> [[a]]
 splitOn del = foldr (\d (x:xs) -> if d == del then []:x:xs else (d:x):xs) [[]]
 
 joinWith :: Eq a => a -> [[a]] -> [a]
-joinWith del xs = foldr (\(x, i) res -> x ++ if i == (length xs - 1) then res else del:res) [] (zip xs [1..])
+joinWith del xs = foldr (\(x, i) res -> x ++ if i == length xs then res else del:res) [] (zip xs [1..])
