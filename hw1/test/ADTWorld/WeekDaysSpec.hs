@@ -20,20 +20,20 @@ spec = do
         nextDay Fri `shouldBe` Sat
         nextDay Sat `shouldBe` Sun
         nextDay Sun `shouldBe` Mon
-    
+
     it "afterDays" $ do
         afterDays Mon 5 `shouldBe` Sat
         afterDays Fri 7 `shouldBe` Fri
         afterDays Tue 16 `shouldBe` Thu
         afterDays Wed 14 `shouldBe` Wed
-    
+
     it "isWeekend" $ do
         isWeekend Mon `shouldBe` False
         isWeekend Fri `shouldBe` False
         isWeekend Tue `shouldBe` False
         isWeekend Sat `shouldBe` True
         isWeekend Sun `shouldBe` True
-    
+
     it "daysToParty" $ do
         daysToParty Mon `shouldBe` 4
         daysToParty Tue `shouldBe` 3

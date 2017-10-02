@@ -6,8 +6,8 @@ module SimpleFunctions
         , contains
         ) where
 
-import           Data.List (sort)
 import           Control.Arrow ((***))
+import           Data.List     (sort)
 
 order3 :: (Ord a) => (a, a, a) -> (a, a, a)
 order3 (x, y, z) = (\[e1, e2, e3] -> (e1, e2, e3)) $ sort [x, y, z]

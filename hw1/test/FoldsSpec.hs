@@ -3,8 +3,8 @@ module FoldsSpec
        , spec
        ) where
 
-import           Folds
 import           ADTWorld.Trees (Tree (..), fromList, toList)
+import           Folds
 import           Test.Hspec
 
 main :: IO ()
@@ -16,7 +16,7 @@ spec = do
         toList (fromList [1, 9, 5, 2, 10]) `shouldBe` [1, 2, 5, 9, 10]
 
     it "foldr" $ do
-        let t = Node 3 (Node 1 Leaf Leaf) $ Node 123 (Node 4 Leaf Leaf) Leaf 
+        let t = Node 3 (Node 1 Leaf Leaf) $ Node 123 (Node 4 Leaf Leaf) Leaf
         foldr (+) 0 t `shouldBe` 131
 
     it "splitOn" $ do

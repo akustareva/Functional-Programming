@@ -7,9 +7,9 @@ module PatternMatching
        , mergeSort
        ) where
 
+import           Control.Arrow ((***))
 import           Data.List     (partition)
 import           System.Random (newStdGen, randomRs)
-import           Control.Arrow ((***))
 
 removeAtBase :: Int -> [a] -> [a]
 removeAtBase n xs = ys ++ if null zs then zs else tail zs

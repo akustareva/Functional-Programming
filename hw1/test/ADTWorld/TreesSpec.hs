@@ -36,5 +36,5 @@ spec = do
         insertKey t (4::Int) `shouldBe` Node 4 Leaf Leaf
 
     it "fromList" $ do
-        fromList [(1::Int), (9::Int), (2::Int), (-5::Int), (0::Int)] `shouldBe` 
+        fromList [(1::Int), (9::Int), (2::Int), (-5::Int), (0::Int)] `shouldBe`
             Node 1 (Node (-5) Leaf (Node 0 Leaf Leaf)) (Node 9 (Node 2 Leaf Leaf) Leaf)
