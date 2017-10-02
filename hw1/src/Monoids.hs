@@ -19,3 +19,13 @@ data NonEmpty a = a :| [a]
 
 instance Semigroup (NonEmpty a) where
     (x:|xs) <> (y:|ys) = x :| (ys ++ [y] ++ xs)
+
+newtype Identity a = Identity { runIdentity :: a }
+     deriving (Eq, Show)
+
+instance (Semigroup a) => Semigroup (Identity a) where
+    (Identity a) <> (Identity b) = Identity (a <> b)
+
+instance (Semigroup a, Monoid a) => Monoid (Identity a) where
+    mempty = Identity mempty
+    mappend = (<>)
