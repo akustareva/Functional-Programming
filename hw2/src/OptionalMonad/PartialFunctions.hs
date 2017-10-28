@@ -8,10 +8,10 @@ module OptionalMonad.PartialFunctions
        , apply
        ) where
 
-import           Control.Applicative
-import           Control.Category
-import           Control.Monad
-import           Data.Maybe
+import           Control.Applicative ((<|>))
+import           Control.Category    (Category(..))
+import           Control.Monad       ((>=>))
+import           Data.Maybe          (fromMaybe, isNothing)
 import           Prelude             hiding (id, (.))
 
 data a ~> b
@@ -44,12 +44,12 @@ isDefinedAt (Partial f) x      = isNothing $ f x
 isDefinedAt (Defaulted pf _) x = isDefinedAt pf x
 
 orElse :: (a ~> b) -> (a ~> b) -> a ~> b
-orElse (Partial f) (Partial g) = Partial $ f <|> g
+orElse (Partial f) (Partial g) = Partial $ \x -> f x <|> g x
 orElse (Defaulted pf d) (Defaulted pg _) = Defaulted (orElse pf pg) d
 orElse pf@(Partial _) (Defaulted pg d)   = Defaulted (orElse pf pg) d
 orElse (Defaulted pf d) pg@(Partial _)   = Defaulted (orElse pf pg) d
 
--- Proofs of category laws:
+-- Proofs of category laws for (~>) using Equational reasoning technique:
 --
 -- Left identity: id . f ≡ f
 -- id . f = Partial $ apply f >=> apply id
