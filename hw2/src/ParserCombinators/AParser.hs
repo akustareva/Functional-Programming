@@ -6,6 +6,9 @@ module ParserCombinators.AParser
        , abParser_
        , intPair
        , intOrUppercase
+       , satisfy
+       , char
+       , posInt
        ) where
 
 import           Control.Applicative (Alternative, empty, (<|>))

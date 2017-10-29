@@ -22,6 +22,7 @@ library
                      , OptionalMonad.PartialFunctions
                      , NondeterministicCalculations
                      , ParserCombinators.AParser
+                     , ParserCombinators.SExpr
   ghc-options:         -Wall
   build-depends:       base >= 4.9 && < 5
   default-language:    Haskell2010
@@ -33,6 +34,7 @@ test-suite hw2-test
   other-modules:       OptionalMonad.ArithmeticExpressionSpec
                      , NondeterministicCalculationsSpec
                      , ParserCombinators.AParserSpec
+                     , ParserCombinators.SExprSpec
   build-depends:       base
                      , hw2
                      , hspec

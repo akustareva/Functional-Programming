@@ -53,7 +53,7 @@ spec = do
         runParser intPair "12 34" `shouldBe` Just ([12, 34], "")
         runParser intPair "122ra" `shouldBe` Nothing
     it "Alternative instance" $ do
-        let f = parseFullPhone <|> parsePhone
+        let f = parsePhone <|> parseFullPhone
         runParser f "888" `shouldBe` Just ("888", "")
         runParser f "+888" `shouldBe` Just ("+888", "")
     it "intOrUppercase" $ do
