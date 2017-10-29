@@ -4,8 +4,8 @@ module ParserCombinators.SExpr
        , spaces
        , ident
        , Ident
-       , Atom(..)
-       , SExpr(..)
+       , Atom (..)
+       , SExpr (..)
        , skipSpaces
        , parseAtom
        , parseSExpr

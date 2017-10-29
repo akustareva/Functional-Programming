@@ -23,6 +23,10 @@ library
                      , NondeterministicCalculations
                      , ParserCombinators.AParser
                      , ParserCombinators.SExpr
+                     , BasicTypeClasses.Fishes.Monads
+                     , BasicTypeClasses.Fishes.MonadInstances
+                     , BasicTypeClasses.Fishes.MonadFishInstances
+                     , BasicTypeClasses.Fishes.MonadJoinInstances
   ghc-options:         -Wall
   build-depends:       base >= 4.9 && < 5
   default-language:    Haskell2010
