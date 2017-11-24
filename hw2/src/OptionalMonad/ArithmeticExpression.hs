@@ -28,6 +28,7 @@ eval (Sub x y) = eval x >>= \xres -> eval y >>= \yres -> return (xres - yres)
 eval (Mul x y) = eval x >>= \xres -> eval y >>= \yres -> return (xres * yres)
 eval (Div x y) = eval x >>= \xres -> eval y >>= \yres -> safeDiv xres yres
 eval (Pow x y) = eval x >>= \xres -> eval y >>= \yres -> return (xres ^ yres)
+-- eval (Add x y) = liftM2 (+) (eval x) (eval y)
 
 safeDiv :: Int -> Int -> Either ArithmeticError Int
 safeDiv _ 0 = Left DivByZero

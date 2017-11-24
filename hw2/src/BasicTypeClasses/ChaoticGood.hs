@@ -81,6 +81,11 @@ instance Foldable (Pair a) where
 
 instance Traversable Identity where
   traverse f (Identity x) = Identity <$> f x
+  
+-- f :: Int -> Maybe Char
+-- x :: [Int]
+-- Maybe [Char]
+-- :t traverse f x
 
 instance Traversable (Either a) where
   traverse f (Right x) = Right <$> f x

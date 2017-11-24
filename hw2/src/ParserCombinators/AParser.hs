@@ -39,9 +39,12 @@ instance Applicative Parser where
 -- task 3
 abParser :: Parser (Char, Char)
 abParser = (,) <$> char 'a' <*> char 'b'
+-- liftA2 (,) (char 'a') (char 'b')
 
 abParser_ :: Parser ()
 abParser_ = (\_ _ -> ()) <$> char 'a' <*> char 'b'
+-- abParser_ = const () <$> abParser
+-- abParser_ = () <$ abParser
 
 intPair :: Parser [Integer]
 intPair = (\f _ s -> [f, s]) <$> posInt <*> char ' ' <*> posInt
