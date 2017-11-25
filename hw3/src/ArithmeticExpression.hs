@@ -10,14 +10,14 @@ import           Data.Map             (Map, insert, lookup)
 import           Prelude              hiding (lookup)
 
 data Expr
-    = Lit Int
+    = Lit Integer
     | Var String
     | Add Expr Expr
     | Sub Expr Expr
     | Mul Expr Expr
     | Div Expr Expr
     | Let String Expr Expr
-    deriving(Show)
+    deriving(Show, Eq)
 
 data MyError
     = DivByZero
@@ -28,7 +28,7 @@ instance Show MyError where
   show DivByZero         = "Division by zero"
   show IncorrectInputMap = "Not all variables have assigned values"
 
-eval :: Expr -> Reader (Map String Expr) (Either MyError Int)
+eval :: Expr -> Reader (Map String Expr) (Either MyError Integer)
 eval (Lit x)             = return $ Right x
 eval (Var name)          = ask >>= \m -> let val = lookup name m
                                          in maybe (return $ Left IncorrectInputMap) eval val
@@ -38,7 +38,7 @@ eval (Mul x y)           = eval x >>= \xres -> eval y >>= \yres -> return $ lift
 eval (Div x y)           = eval x >>= \xres -> eval y >>= \yres -> return $ safeDiv xres yres
 eval (Let name val expr) = local (insert name val) (eval expr)
 
-safeDiv :: Either MyError Int -> Either MyError Int -> Either MyError Int
+safeDiv :: Either MyError Integer -> Either MyError Integer -> Either MyError Integer
 safeDiv err@(Left _) _      = err
 safeDiv _ err@(Left _)      = err
 safeDiv _ (Right 0)         = Left DivByZero
