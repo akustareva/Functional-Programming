@@ -20,6 +20,7 @@ library
   hs-source-dirs:      src
   exposed-modules:     ArithmeticExpression
                      , ExpressionParser
+                     , UpdateVariables
   ghc-options:         -Wall
   build-depends:       base >= 4.9 && < 5
                      , containers
@@ -33,6 +34,7 @@ test-suite hw3-test
   main-is:             Spec.hs
   other-modules:       ArithmeticExpressionSpec
                      , ExpressionParserSpec
+                     , UpdateVariablesSpec
   build-depends:       base
                      , hw3
                      , hspec
