@@ -48,10 +48,9 @@ exprParser :: Parser Expr
 exprParser = makeExprParser term operators
 
 term :: Parser Expr
-term = parens letParser
+term = parens (letParser <|> exprParser)
   <|> Lit <$> integer
   <|> Var <$> identifier
-  <|> parens exprParser
 
 letParser :: Parser Expr
 letParser = do

@@ -20,3 +20,5 @@ spec =
         let str = "x + y * 3 / 2 - 1"
         parseMaybe exprParser str `shouldBe`
             Just (Sub (Add (Var "x") (Div (Mul (Var "y") (Lit 3)) (Lit 2))) (Lit 1))
+        parseMaybe exprParser "(let x = 2 in x)" `shouldBe` Just (Let "x" (Lit 2) (Var "x"))
+        parseMaybe exprParser "(3 + 4)" `shouldBe` Just (Add (Lit 3) (Lit 4)) 
