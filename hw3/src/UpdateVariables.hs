@@ -1,13 +1,16 @@
+{-# LANGUAGE FlexibleContexts      #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+
 module UpdateVariables
        ( UpdateVarsError(..)
        , addVar
        , updateVar
        ) where
 
-import           Control.Monad.State (State, state)
-import           Data.Map            (Map, insert, lookup, member)
-import           Data.Maybe          (isNothing)
-import           Prelude             hiding (lookup)
+import           Control.Monad.Except (MonadError, throwError)
+import           Control.Monad.State  (MonadState, get, modify)
+import           Data.Map             (Map, insert, lookup)
+import           Prelude              hiding (map, lookup)
 
 data UpdateVarsError
     = VarAlreadyExists
@@ -20,11 +23,22 @@ instance Show UpdateVarsError where
   show VarNotDeclared   = "Variable is not declared"
   show NoError          = "OK"
 
-addVar :: String -> Int -> State (Map String Int) UpdateVarsError
-addVar name val = state $ \context -> if member name context then (VarAlreadyExists, context)
-                                      else (NoError, insert name val context)
+addVar :: ( MonadState (Map String Integer)  m
+          , MonadError UpdateVarsError m
+          )
+     => String -> Integer -> m ()
+addVar name val = do
+                  map <- get
+                  case lookup name map of
+                      Just _  -> throwError VarAlreadyExists
+                      Nothing -> modify $ \map' -> insert name val map'
 
-updateVar :: String -> Int -> State (Map String Int) UpdateVarsError
-updateVar name val = state $ \context -> let oldVal = lookup name context in
-                                         if isNothing oldVal then (VarNotDeclared, context)
-                                         else (NoError, insert name val context)
+updateVar :: ( MonadState (Map String Integer)  m
+          , MonadError UpdateVarsError m
+          )
+     => String -> Integer -> m ()
+updateVar name val = do
+                     map <- get
+                     case lookup name map of
+                        Just _  -> modify $ \map' -> insert name val map'
+                        Nothing -> throwError VarNotDeclared
