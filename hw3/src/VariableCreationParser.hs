@@ -1,6 +1,10 @@
 module VariableCreationParser
        ( Statement(..)
+       , getStmtName
+       , getStmtValue
        , Action(..)
+       , isCreateAction
+       , getStmnt
        , actionParser
        , crtParser
        , updParser
@@ -16,10 +20,24 @@ import           Text.Megaparsec.Expr (makeExprParser)
 data Statement = Statement { name :: String, value :: Expr}
     deriving(Show, Eq)
 
+getStmtName :: Statement -> String
+getStmtName (Statement name _) = name
+
+getStmtValue :: Statement -> Expr
+getStmtValue (Statement _ value) = value
+
 data Action
     = Create Statement
     | Update Statement
     deriving(Show, Eq)
+
+isCreateAction :: Action -> Bool
+isCreateAction Create{} = True
+isCreateAction _        = False
+
+getStmnt :: Action -> Statement
+getStmnt (Create stmt) = stmt
+getStmnt (Update stmt) = stmt
 
 actionParser :: Parser Action
 actionParser = makeExprParser term empty

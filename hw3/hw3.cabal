@@ -22,6 +22,7 @@ library
                      , ExpressionParser
                      , UpdateVariables
                      , VariableCreationParser
+                     , FullValueAssignment
   ghc-options:         -Wall
   build-depends:       base >= 4.9 && < 5
                      , containers
@@ -37,6 +38,7 @@ test-suite hw3-test
                      , ExpressionParserSpec
                      , UpdateVariablesSpec
                      , VariableCreationParserSpec
+                     , FullValueAssignmentSpec
   build-depends:       base
                      , hw3
                      , hspec

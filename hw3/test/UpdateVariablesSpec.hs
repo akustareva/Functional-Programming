@@ -3,6 +3,7 @@ module UpdateVariablesSpec
        , spec
        ) where
 
+import           ArithmeticExpression
 import           Control.Monad.State  (runStateT)
 import           Data.Map             (empty, fromList)
 import           Test.Hspec

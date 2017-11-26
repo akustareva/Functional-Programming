@@ -2,31 +2,20 @@
 {-# LANGUAGE MultiParamTypeClasses #-}
 
 module UpdateVariables
-       ( UpdateVarsError(..)
-       , addVar
+       ( addVar
        , updateVar
        ) where
 
+import           ArithmeticExpression
 import           Control.Monad.Except (MonadError, throwError)
 import           Control.Monad.State  (MonadState, get, modify)
 import           Data.Map             (Map, insert, lookup)
-import           Prelude              hiding (map, lookup)
-
-data UpdateVarsError
-    = VarAlreadyExists
-    | VarNotDeclared
-    | NoError
-    deriving(Eq)
-
-instance Show UpdateVarsError where
-  show VarAlreadyExists = "Variable already exists"
-  show VarNotDeclared   = "Variable is not declared"
-  show NoError          = "OK"
+import           Prelude              hiding (lookup, map)
 
 addVar :: ( MonadState (Map String Integer)  m
-          , MonadError UpdateVarsError m
+          , MonadError CustomError m
           )
-     => String -> Integer -> m ()
+       => String -> Integer -> m ()
 addVar name val = do
                   map <- get
                   case lookup name map of
@@ -34,9 +23,9 @@ addVar name val = do
                       Nothing -> modify $ \map' -> insert name val map'
 
 updateVar :: ( MonadState (Map String Integer)  m
-          , MonadError UpdateVarsError m
-          )
-     => String -> Integer -> m ()
+             , MonadError CustomError m
+             )
+          => String -> Integer -> m ()
 updateVar name val = do
                      map <- get
                      case lookup name map of

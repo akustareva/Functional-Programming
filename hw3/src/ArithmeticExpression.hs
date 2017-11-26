@@ -3,7 +3,7 @@
 
 module ArithmeticExpression
        ( Expr(..)
-       , MyError(..)
+       , CustomError(..)
        , eval
        ) where
 
@@ -23,17 +23,21 @@ data Expr
     | Let String Expr Expr
     deriving(Show, Eq)
 
-data MyError
+data CustomError
     = DivByZero
     | IncorrectInputMap
+    | VarAlreadyExists
+    | VarNotDeclared
     deriving(Eq)
 
-instance Show MyError where
+instance Show CustomError where
   show DivByZero         = "Division by zero"
   show IncorrectInputMap = "Not all variables have assigned values"
+  show VarAlreadyExists  = "Variable already exists"
+  show VarNotDeclared    = "Variable is not declared"
 
 eval :: ( MonadReader (Map String Expr)  m
-        , MonadError  MyError m
+        , MonadError  CustomError m
         )
      => Expr -> m Integer
 eval (Lit x)             = return x
@@ -45,6 +49,6 @@ eval (Mul x y)           = liftM2 (*) (eval x) (eval y)
 eval (Div x y)           = eval x >>= \xres -> eval y >>= \yres -> safeDiv xres yres
 eval (Let name val expr) = local (insert name val) (eval expr)
 
-safeDiv :: MonadError  MyError m => Integer -> Integer -> m Integer
+safeDiv :: MonadError  CustomError m => Integer -> Integer -> m Integer
 safeDiv _ 0 = throwError DivByZero
 safeDiv x y = return $ x `div` y
