@@ -1,5 +1,6 @@
 module ExpressionParser
-       ( sc
+       ( Parser(..)
+       , sc
        , lexeme
        , symbol
        , parens

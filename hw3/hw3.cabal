@@ -21,6 +21,7 @@ library
   exposed-modules:     ArithmeticExpression
                      , ExpressionParser
                      , UpdateVariables
+                     , VariableCreationParser
   ghc-options:         -Wall
   build-depends:       base >= 4.9 && < 5
                      , containers
@@ -35,6 +36,7 @@ test-suite hw3-test
   other-modules:       ArithmeticExpressionSpec
                      , ExpressionParserSpec
                      , UpdateVariablesSpec
+                     , VariableCreationParserSpec
   build-depends:       base
                      , hw3
                      , hspec
