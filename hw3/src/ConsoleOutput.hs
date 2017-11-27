@@ -43,5 +43,5 @@ printResult stmt = do
                    let stmtExpr = getStmtValue stmt
                    mp <- get
                    let mp' = fromList $ convertIntToLit $ toList mp
-                   val <- catchError (runReaderT (eval stmtExpr) mp') throwError
+                   val <- runReaderT (eval stmtExpr) mp'
                    liftIO $ print val

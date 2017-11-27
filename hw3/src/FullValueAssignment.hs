@@ -26,7 +26,7 @@ updateVarsSet (a:actns) = do
                           let stmtExpr = getStmtValue stmt
                           mp <- get
                           let mp' = fromList $ convertIntToLit $ toList mp
-                          varValue <- catchError (runReaderT (eval stmtExpr) mp') throwError
+                          varValue <- runReaderT (eval stmtExpr) mp'
                           if isCreateAction a then addVar stmtName varValue
                                               else updateVar stmtName varValue
                           updateVarsSet actns
