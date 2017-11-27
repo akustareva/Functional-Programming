@@ -3,10 +3,10 @@
 
 module ArithmeticExpression
        ( Expr(..)
-       , CustomError(..)
        , eval
        ) where
 
+import           CustomError
 import           Control.Monad        (liftM2)
 import           Control.Monad.Except (MonadError, throwError)
 import           Control.Monad.Reader (MonadReader, ask, local)
@@ -22,19 +22,6 @@ data Expr
     | Div Expr Expr
     | Let String Expr Expr
     deriving(Show, Eq)
-
-data CustomError
-    = DivByZero
-    | IncorrectInputMap
-    | VarAlreadyExists
-    | VarNotDeclared
-    deriving(Eq)
-
-instance Show CustomError where
-  show DivByZero         = "Division by zero"
-  show IncorrectInputMap = "Not all variables have assigned values"
-  show VarAlreadyExists  = "Variable already exists"
-  show VarNotDeclared    = "Variable is not declared"
 
 eval :: ( MonadReader (Map String Expr)  m
         , MonadError  CustomError m

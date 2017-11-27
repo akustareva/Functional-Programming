@@ -3,6 +3,7 @@ module UpdateVariablesSpec
        , spec
        ) where
 
+import           CustomError
 import           ArithmeticExpression
 import           Control.Monad.State  (runStateT)
 import           Data.Map             (empty, fromList)

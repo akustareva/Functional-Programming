@@ -3,6 +3,7 @@ module ArithmeticExpressionSpec
        , spec
        ) where
 
+import           CustomError
 import           ArithmeticExpression
 import           Control.Monad.Except (runExceptT)
 import           Data.Map             (empty, fromList)

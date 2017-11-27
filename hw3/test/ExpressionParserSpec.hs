@@ -13,7 +13,7 @@ main = hspec spec
 
 spec :: Spec
 spec =
-    it "ExpressionParsing" $ do
+    it "Expression parser" $ do
         let str = "x + 3 * (let x = 2 in x)"
         parseMaybe exprParser str `shouldBe`
             Just (Add (Var "x") (Mul (Lit 3) (Let "x" (Lit 2) (Var "x"))))

@@ -6,6 +6,7 @@ module UpdateVariables
        , updateVar
        ) where
 
+import           CustomError
 import           ArithmeticExpression
 import           Control.Monad.Except (MonadError, throwError)
 import           Control.Monad.State  (MonadState, get, modify)

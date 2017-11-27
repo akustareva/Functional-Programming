@@ -3,8 +3,10 @@
 
 module FullValueAssignment
        ( updateVarsSet
+       , convertIntToLit
        ) where
 
+import           CustomError
 import           ArithmeticExpression
 import           Control.Monad.Except   (MonadError, catchError, throwError)
 import           Control.Monad.Reader   (runReaderT)

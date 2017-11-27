@@ -19,10 +19,13 @@ tested-with:         GHC == 8.0.1
 library
   hs-source-dirs:      src
   exposed-modules:     ArithmeticExpression
+                     , CustomError
                      , ExpressionParser
                      , UpdateVariables
                      , VariableCreationParser
                      , FullValueAssignment
+                     , ConsoleOutput
+                     , ConsoleInput
   ghc-options:         -Wall
   build-depends:       base >= 4.9 && < 5
                      , containers
