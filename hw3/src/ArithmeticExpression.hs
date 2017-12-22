@@ -28,7 +28,7 @@ eval :: ( MonadReader (Map String Expr)  m
         )
      => Expr -> m Integer
 eval (Lit x)             = return x
-eval (Var name)          = ask >>= \m -> let val = lookup name m
+eval (Var name)          = ask >>= \m -> let val = lookup name m -- asks (lookup name) >>= \val
                                          in maybe (throwError IncorrectInputMap) eval val
 eval (Add x y)           = liftM2 (+) (eval x) (eval y)
 eval (Sub x y)           = liftM2 (-) (eval x) (eval y)

@@ -7,7 +7,6 @@ data CustomError
     | IncorrectInputMap
     | VarAlreadyExists
     | VarNotDeclared
-    | ParseError
     deriving(Eq)
 
 instance Show CustomError where

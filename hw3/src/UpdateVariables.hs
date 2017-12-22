@@ -18,10 +18,10 @@ addVar :: ( MonadState (Map String Integer)  m
           )
        => String -> Integer -> m ()
 addVar name val = do
-                  map <- get
+                  map <- get -- gets (lookup name) >>= \case -- LambdaCase
                   case lookup name map of
                       Just _  -> throwError VarAlreadyExists
-                      Nothing -> modify $ \map' -> insert name val map'
+                      Nothing -> modify $ insert name val
 
 updateVar :: ( MonadState (Map String Integer)  m
              , MonadError CustomError m

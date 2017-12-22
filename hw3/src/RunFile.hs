@@ -25,8 +25,10 @@ main = do
        when (length args /= 1) $ putStrLn "Please specify filename"
        when (length args == 1) $ do
                                  s <- readFile (head args)
-                                 runExceptT $ evalStateT (processLines (lines s)) empty
-                                 return ()
+                                 result <- runExceptT $ evalStateT (processLines (lines s)) empty
+                                 case result of 
+                                     Left err -> print err
+                                     Right _ -> return ()
 
 processLines :: ( MonadState (Map String Integer)  m
                 , MonadError CustomError m

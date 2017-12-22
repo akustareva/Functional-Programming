@@ -10,7 +10,7 @@ module ConsoleOutput
 
 import           ArithmeticExpression
 import           Control.Applicative  (empty)
-import           Control.Monad.Except (MonadError, catchError, throwError)
+import           Control.Monad.Except (MonadError)
 import           Control.Monad.Reader (MonadIO, liftIO, runReaderT)
 import           Control.Monad.State  (MonadState, get)
 import           CustomError

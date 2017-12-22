@@ -53,7 +53,7 @@ crtParser = do
             return (Create stmt)
 
 updParser :: Parser Action
-updParser = do
+updParser = do -- Update <$> stmtParser
             stmt <- stmtParser
             return (Update stmt)
 
