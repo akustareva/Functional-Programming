@@ -22,11 +22,14 @@ library
                      , Lens
                      , Algo.MapNub
                      , Algo.MergeSortNub
+                     , Comonads
   ghc-options:         -Wall
   build-depends:       base >= 4.9 && < 5
                      , template-haskell
                      , lens
                      , containers
+                     , comonad
+                     , text
   default-language:    Haskell2010
 
 test-suite hw4-test
