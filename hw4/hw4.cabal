@@ -20,10 +20,13 @@ library
   hs-source-dirs:      src
   exposed-modules:     TemplateHaskell
                      , Lens
+                     , Algo.MapNub
+                     , Algo.MergeSortNub
   ghc-options:         -Wall
   build-depends:       base >= 4.9 && < 5
                      , template-haskell
                      , lens
+                     , containers
   default-language:    Haskell2010
 
 test-suite hw4-test
@@ -35,4 +38,14 @@ test-suite hw4-test
                      , hw4
                      , hspec
   ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  default-language:    Haskell2010
+
+benchmark is-bench
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      bench
+  main-is:             Main.hs
+  build-depends:       base
+                     , hw4
+                     , criterion
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N -Wall
   default-language:    Haskell2010

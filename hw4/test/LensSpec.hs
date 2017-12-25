@@ -3,8 +3,8 @@ module LensSpec
        , spec
        ) where
 
-import           Test.Hspec
 import           Lens
+import           Test.Hspec
 
 main :: IO ()
 main = hspec spec
@@ -21,3 +21,12 @@ spec = do
     it "over" $ do
         over _1 (+1) (2, 7) `shouldBe` (3, 7)
         over _2 (*3) (2, 7) `shouldBe` (2, 21)
+    it "(.~)" $ do
+        (_1 .~ 4 $ (1, 2)) `shouldBe` (4, 2)
+        (_2 .~ 4 $ (1, 2)) `shouldBe` (1, 4)
+    it "(^.)" $ do
+        (2, 7)^._1 `shouldBe` 2
+        (2, 7)^._2 `shouldBe` 7
+    it "(%~)" $ do
+        (_1 %~ (+1) $ (2, 7)) `shouldBe` (3, 7)
+        (_2 %~ (+1) $ (2, 7)) `shouldBe` (2, 8)

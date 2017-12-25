@@ -17,6 +17,15 @@ view lens object = getConst $ lens Const object
 over :: Lens' s a -> (a -> a) -> s -> s
 over lens func object = runIdentity $ lens (Identity . func) object
 
+(.~) :: Lens' s a -> a -> s -> s
+(.~) = set
+
+(^.) :: s -> Lens' s a -> a
+(^.) object lens =  view lens object
+
+(%~) :: Lens' s a -> (a -> a) -> s -> s
+(%~) = over
+
 -- _1 :: Functor f => (a -> f b) -> (a, x) -> f (b, x)
 _1 :: Lens (a, x) (b, x) a b
 _1 f (a, x) = (\z -> (z, x)) <$> f a
